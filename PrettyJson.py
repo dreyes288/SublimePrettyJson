@@ -27,6 +27,10 @@ import subprocess
 if sys.platform != 'win32' and '/usr/local/bin' not in os.environ['PATH']:
     os.environ["PATH"] += os.pathsep + '/usr/local/bin'
 
+""" on OS X 10.9.4 I had to manually add mac ports bin path so jq can be found """
+if sys.platform == 'darwin' and '/opt/local/bin' not in os.environ['PATH']:
+    os.environ['PATH'] += os.pathsep + '/opt/local/bin'
+
 try:
     # checking if ./jq tool is available so we can use it
     s = subprocess.Popen(["jq", "--version"],
